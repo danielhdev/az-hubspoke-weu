@@ -3,7 +3,7 @@
 Landing-Zone-Connectivity als Portfolio-Repo: ein Hub, zwei Spokes, Azure Firewall als Default-Route, Private DNS, ein Private Endpoint.  
 Region `westeurope`. Terraform. Strikt ephemeral. **Apply-fähig** (`env/weu-lab`).
 
-Kein Enterprise-Scale, kein vWAN, kein Live-AKS, kein VPN-Gateway.
+Kein vWAN, kein Live-AKS, kein VPN-Gateway.
 
 ## 1. Problem
 
