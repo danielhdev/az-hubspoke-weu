@@ -1,0 +1,9 @@
+# Umbenennen/kopieren nach backend.tf nur lokal.
+# terraform {
+#   backend "azurerm" {
+#     resource_group_name  = "rg-tfstate-lab"
+#     storage_account_name = "REPLACE_ME"
+#     container_name       = "tfstate"
+#     key                  = "az-hubspoke-weu/weu-lab.tfstate"
+#   }
+# }

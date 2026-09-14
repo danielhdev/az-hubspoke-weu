@@ -1,0 +1,32 @@
+flowchart LR
+  inet((Internet))
+  pip[FW Public IP]
+
+  subgraph hub["Hub vnet-hub-weu-01  10.20.0.0/22"]
+    fw["Azure Firewall Standard\nAzureFirewallSubnet 10.20.0.0/26"]
+    gw["GatewaySubnet 10.20.0.64/27\nkein Gateway"]
+    bas["AzureBastionSubnet 10.20.0.96/26\nkein Bastion"]
+    dns["Private DNS Zones\nprivatelink.blob.core.windows.net"]
+  end
+
+  subgraph spokeapp["Spoke App  10.20.16.0/24"]
+    vm["Test-VM  snet-workload"]
+    pe["Private Endpoint\nsnet-privatelink"]
+    sa[(Storage Account)]
+  end
+
+  subgraph spokeaks["Spoke AKS-ready  10.20.32.0/22"]
+    aksn["snet-aks-system / user / ingress\nohne Cluster"]
+  end
+
+  reserved["Reserviert, ungebaut\n10.10.0.0/16 On-Prem\n10.21.0.0/16 North Europe\n10.40.0.0/16 AWS"]
+
+  inet --- pip --> fw
+  vm -->|"UDR 0/0"| fw
+  aksn -->|"UDR 0/0"| fw
+  vm -->|"Spoke-to-Spoke via FW"| aksn
+  vm --> pe --> sa
+  dns -. VNet-Links .-> spokeapp
+  dns -. VNet-Links .-> spokeaks
+  dns -. VNet-Links .-> hub
+  gw -.-> reserved

@@ -1,0 +1,13 @@
+# Optional. Defaults reichen.
+# Subscription nur via: export ARM_SUBSCRIPTION_ID=...
+# Keine echten IDs committen.
+
+location       = "westeurope"
+location_short = "weu"
+prefix         = "azhs"
+
+tags = {
+  project = "az-hubspoke-weu"
+  env     = "lab"
+  destroy = "ephemeral"
+}
